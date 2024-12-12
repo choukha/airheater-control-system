@@ -1,7 +1,7 @@
 {
   "name": "air-heater-control-system",
   "version": "0.1.0",
-  "homepage": "https://yourusername.github.io/air-heater-control-system",
+  "homepage": "https://choukha.github.io/airheater-control-system",
   "private": true,
   "dependencies": {
     "@tailwindcss/typography": "^0.5.15",
