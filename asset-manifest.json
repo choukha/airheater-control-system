@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/airheater-control-system/static/css/main.3a1e56e9.css",
+    "main.js": "/airheater-control-system/static/js/main.cf384c1e.js",
+    "index.html": "/airheater-control-system/index.html",
+    "main.3a1e56e9.css.map": "/airheater-control-system/static/css/main.3a1e56e9.css.map",
+    "main.cf384c1e.js.map": "/airheater-control-system/static/js/main.cf384c1e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3a1e56e9.css",
+    "static/js/main.cf384c1e.js"
+  ]
+}
