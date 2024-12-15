@@ -7,13 +7,13 @@ import {
   Shield, 
   Workflow, 
   Database, 
-  CloudUpload, 
   LineChart, 
   Cpu,
   Lock,
   User,
   Globe,
-  Terminal
+  Terminal,
+  Share2
 } from 'lucide-react';
 
 const NavLink = ({ href, children }) => (
@@ -103,7 +103,7 @@ const App = () => {
           <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <h1 className="text-4xl font-extrabold mb-4">
-                Air Heater Control System and Monitoring
+                Air Heater Control System
               </h1>
               <p className="text-xl text-blue-100 mb-6">
                 Advanced temperature control with real-time monitoring, OPC UA integration, and intelligent process management
@@ -144,7 +144,7 @@ const App = () => {
                     Provide real-time monitoring and data visualization
                   </li>
                   <li className="flex items-center">
-                    <CloudUpload className="h-5 w-5 mr-3 text-blue-600" />
+                    <Share2 className="h-5 w-5 mr-3 text-blue-600" />
                     Enable seamless industrial data communication
                   </li>
                   <li className="flex items-center">
@@ -190,7 +190,7 @@ const App = () => {
                     </div>
                   </li>
                   <li className="flex items-center bg-gray-50 p-3 rounded-md">
-                    <CloudUpload className="h-6 w-6 mr-3 text-blue-600" />
+                    <Share2 className="h-6 w-6 mr-3 text-blue-600" />
                     <div>
                       <h4 className="font-semibold">OPC UA Server</h4>
                       <p className="text-sm text-gray-600">Industrial data communication protocol</p>
@@ -211,7 +211,7 @@ const App = () => {
                     </div>
                     <div className="h-1 w-16 bg-gray-300"></div>
                     <div className="bg-purple-500 text-white p-3 rounded-full">
-                      <CloudUpload className="h-6 w-6" />
+                      <Share2 className="h-6 w-6" />
                     </div>
                   </div>
                 </div>
@@ -275,7 +275,7 @@ const App = () => {
                 <span>Launch Dashboard</span>
               </PrimaryButton>
               <PrimaryButton 
-                href="https://github.com/yourusername/air-heater-control"
+                href="https://github.com/choukha/airheater-control"
                 target="_blank"
                 variant="secondary"
               >
