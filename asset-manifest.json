@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/airheater-control-system/static/css/main.3a1e56e9.css",
-    "main.js": "/airheater-control-system/static/js/main.cf384c1e.js",
+    "main.css": "/airheater-control-system/static/css/main.d97b1c1a.css",
+    "main.js": "/airheater-control-system/static/js/main.5de5a35d.js",
     "index.html": "/airheater-control-system/index.html",
-    "main.3a1e56e9.css.map": "/airheater-control-system/static/css/main.3a1e56e9.css.map",
-    "main.cf384c1e.js.map": "/airheater-control-system/static/js/main.cf384c1e.js.map"
+    "main.d97b1c1a.css.map": "/airheater-control-system/static/css/main.d97b1c1a.css.map",
+    "main.5de5a35d.js.map": "/airheater-control-system/static/js/main.5de5a35d.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a1e56e9.css",
-    "static/js/main.cf384c1e.js"
+    "static/css/main.d97b1c1a.css",
+    "static/js/main.5de5a35d.js"
   ]
 }
