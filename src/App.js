@@ -1,249 +1,97 @@
 import React from 'react';
-import { useState } from 'react';
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, Legend } from 'recharts';
-import { ChevronDown, ChevronUp, BarChart2, Settings, Shield, Workflow } from 'lucide-react';
+import { 
+  Settings, 
+  ChevronDown, 
+  ChevronUp, 
+  BarChart2, 
+  Shield, 
+  Workflow, 
+  Database, 
+  CloudUpload, 
+  LineChart, 
+  Cpu,
+  Lock,
+  User,
+  Globe,
+  Terminal
+} from 'lucide-react';
 
-// Add NavLink component
 const NavLink = ({ href, children }) => (
   <a 
     href={href} 
-    className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+    className="text-gray-600 hover:text-blue-700 transition-colors duration-200 font-medium"
   >
     {children}
   </a>
 );
 
-// Add PrimaryButton component
-const PrimaryButton = ({ href, target, children }) => (
-  <a
-    href={href}
-    target={target}
-    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
-  >
-    {children}
-  </a>
-);
+const PrimaryButton = ({ href, target, children, variant = "primary" }) => {
+  const variantStyles = {
+    primary: "bg-blue-600 text-white hover:bg-blue-700",
+    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300"
+  };
 
-const demoData = [
-  { time: '00:00', temperature: 25.2, setpoint: 25.0, control: 2.5 },
-  { time: '00:10', temperature: 25.5, setpoint: 25.0, control: 2.3 },
-  { time: '00:20', temperature: 24.8, setpoint: 25.0, control: 2.7 },
-  { time: '00:30', temperature: 25.1, setpoint: 25.0, control: 2.4 }
-];
+  return (
+    <a
+      href={href}
+      target={target}
+      className={`${variantStyles[variant]} px-4 py-2 rounded-md transition-colors duration-200 flex items-center space-x-2`}
+    >
+      {children}
+    </a>
+  );
+};
+
+const Section = ({ title, icon: Icon, children, defaultOpen = true }) => {
+  const [isExpanded, setIsExpanded] = React.useState(defaultOpen);
+  
+  return (
+    <div className="mb-8 bg-white rounded-lg shadow-md overflow-hidden">
+      <div 
+        className="px-6 py-4 flex justify-between items-center cursor-pointer hover:bg-gray-50"
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <div className="flex items-center">
+          <Icon className="h-6 w-6 text-blue-600 mr-3" />
+          <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
+        </div>
+        {isExpanded ? <ChevronUp className="h-6 w-6 text-gray-500" /> : <ChevronDown className="h-6 w-6 text-gray-500" />}
+      </div>
+      {isExpanded && (
+        <div className="px-6 py-4 border-t border-gray-200">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Layout = ({ children }) => (
   <div className="min-h-screen bg-gray-50">
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <Settings className="h-8 w-8 text-blue-600 mr-2" />
-            <span className="text-xl font-bold text-gray-900">Industrial Air Heater System</span>
+            <Terminal className="h-8 w-8 text-blue-600 mr-3" />
+            <span className="text-xl font-bold text-gray-900">Air Heater Control</span>
           </div>
           <div className="flex items-center space-x-6">
             <NavLink href="#overview">Overview</NavLink>
-            <NavLink href="#control">Control System</NavLink>
-            <NavLink href="#monitoring">Monitoring</NavLink>
             <NavLink href="#architecture">Architecture</NavLink>
+            <NavLink href="#features">Features</NavLink>
             <NavLink href="#security">Security</NavLink>
             <PrimaryButton 
-              href="https://your-streamlit-url.com" 
+              href="https://airheater-control-monitor.streamlit.app/"
               target="_blank"
             >
-              Live Dashboard
+              <Globe className="h-4 w-4" />
+              <span>Live Dashboard</span>
             </PrimaryButton>
           </div>
         </div>
       </div>
     </nav>
     {children}
-    <footer className="bg-white mt-12 border-t">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Documentation</h3>
-            <ul className="mt-4 space-y-4">
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Technical Specs</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">API Reference</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Technologies</h3>
-            <ul className="mt-4 space-y-4">
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">OPC UA</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Azure Cloud</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">Contact</h3>
-            <ul className="mt-4 space-y-4">
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Support</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Technical Help</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
-);
-
-const Section = ({ title, icon: Icon, children, id }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  
-  return (
-    <section id={id} className="py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white shadow rounded-lg overflow-hidden">
-          <div 
-            className="px-6 py-4 flex justify-between items-center cursor-pointer hover:bg-gray-50"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            <div className="flex items-center">
-              <Icon className="h-6 w-6 text-blue-600 mr-2" />
-              <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
-            </div>
-            {isExpanded ? <ChevronUp className="h-6 w-6" /> : <ChevronDown className="h-6 w-6" />}
-          </div>
-          {isExpanded && (
-            <div className="px-6 py-4 border-t border-gray-200">
-              {children}
-            </div>
-          )}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const ControlSystem = () => (
-  <div className="prose max-w-none">
-    <h3>Temperature Control Implementation</h3>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div>
-        <h4>PI Controller</h4>
-        <ul>
-          <li>Proportional Gain (Kp): 2.0</li>
-          <li>Integral Time (Ti): 7.5s</li>
-          <li>Sampling Time: 0.1s</li>
-        </ul>
-        <h4>Features</h4>
-        <ul>
-          <li>Anti-windup protection</li>
-          <li>Bumpless transfer</li>
-          <li>Output limiting</li>
-        </ul>
-        <h4>Performance Metrics</h4>
-        <ul>
-          <li>Settling Time: &lt; 30s</li>
-          <li>Overshoot: &lt; 5%</li>
-          <li>Steady-state error: &lt; 0.1°C</li>
-        </ul>
-      </div>
-      <div>
-        <LineChart width={500} height={300} data={demoData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="time" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
-          <Line type="monotone" dataKey="setpoint" stroke="#82ca9d" />
-        </LineChart>
-      </div>
-    </div>
-  </div>
-);
-
-const MonitoringSystem = () => (
-  <div className="prose max-w-none">
-    <h3>Real-time Monitoring Features</h3>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div>
-        <h4>Data Collection</h4>
-        <ul>
-          <li>Temperature readings: 10 samples/second</li>
-          <li>Control signal logging</li>
-          <li>System state monitoring</li>
-        </ul>
-        <h4>Visualization</h4>
-        <ul>
-          <li>Real-time temperature plots</li>
-          <li>Historical trend analysis</li>
-          <li>Control signal monitoring</li>
-          <li>System performance metrics</li>
-        </ul>
-      </div>
-      <div>
-        <LineChart width={500} height={300} data={demoData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="time" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="control" stroke="#ff7300" />
-        </LineChart>
-      </div>
-    </div>
-  </div>
-);
-
-const SystemArchitecture = () => (
-  <div className="prose max-w-none">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div>
-        <h3>System Components</h3>
-        <h4>Hardware</h4>
-        <ul>
-          <li>Air heater unit with temperature sensor</li>
-          <li>Control system interface</li>
-          <li>Data acquisition system</li>
-        </ul>
-        <h4>Software</h4>
-        <ul>
-          <li>PI Controller implementation</li>
-          <li>OPC UA server</li>
-          <li>Azure SQL Database</li>
-          <li>Streamlit monitoring dashboard</li>
-        </ul>
-      </div>
-      <div className="flex items-center justify-center">
-        <img 
-          src="/assets/images/architecture.png" 
-          alt="System Architecture"
-          className="rounded-lg shadow-md"
-        />
-      </div>
-    </div>
-  </div>
-);
-
-const SecuritySection = () => (
-  <div className="prose max-w-none">
-    <h3>System Security</h3>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div>
-        <h4>Security Measures</h4>
-        <ul>
-          <li>SQL injection protection</li>
-          <li>OPC UA security features</li>
-          <li>Azure security integration</li>
-          <li>Access control mechanisms</li>
-        </ul>
-        <h4>Data Protection</h4>
-        <ul>
-          <li>Encrypted data transmission</li>
-          <li>Secure data storage</li>
-          <li>Regular security audits</li>
-        </ul>
-      </div>
-      <div className="flex items-center justify-center">
-        <img 
-          src="/assets/images/security.png" 
-          alt="Security Architecture"
-          className="rounded-lg shadow-md"
-        />
-      </div>
-    </div>
   </div>
 );
 
@@ -251,49 +99,203 @@ const App = () => {
   return (
     <Layout>
       <main>
-        <div className="bg-white shadow">
-          <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Industrial Air Heater Control & Monitoring System
-            </h1>
-            <p className="text-xl text-gray-600">
-              Advanced temperature control with real-time monitoring and cloud integration
-            </p>
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+          <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <h1 className="text-4xl font-extrabold mb-4">
+                Air Heater Control System and Monitoring
+              </h1>
+              <p className="text-xl text-blue-100 mb-6">
+                Advanced temperature control with real-time monitoring, OPC UA integration, and intelligent process management
+              </p>
+              <div className="flex space-x-4">
+                <PrimaryButton 
+                  href="https://airheater-control-monitor.streamlit.app/"
+                  target="_blank"
+                >
+                  <LineChart className="h-5 w-5" />
+                  <span>Launch Dashboard</span>
+                </PrimaryButton>
+                <PrimaryButton 
+                  href="https://github.com/yourusername/air-heater-control"
+                  target="_blank"
+                  variant="secondary"
+                >
+                  <Settings className="h-5 w-5" />
+                  <span>View Source Code</span>
+                </PrimaryButton>
+              </div>
+            </div>
           </div>
         </div>
 
-        <Section title="Control System" icon={Settings} id="control">
-          <ControlSystem />
-        </Section>
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <Section title="System Overview" icon={BarChart2}>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Key Objectives</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center">
+                    <Cpu className="h-5 w-5 mr-3 text-blue-600" />
+                    Implement advanced temperature control for industrial processes
+                  </li>
+                  <li className="flex items-center">
+                    <LineChart className="h-5 w-5 mr-3 text-blue-600" />
+                    Provide real-time monitoring and data visualization
+                  </li>
+                  <li className="flex items-center">
+                    <CloudUpload className="h-5 w-5 mr-3 text-blue-600" />
+                    Enable seamless industrial data communication
+                  </li>
+                  <li className="flex items-center">
+                    <Shield className="h-5 w-5 mr-3 text-blue-600" />
+                    Ensure robust cybersecurity and data integrity
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-blue-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4 text-blue-900">
+                  Industry 4.0 Integration
+                </h3>
+                <p className="text-gray-700">
+                  Transforms traditional manual control into a connected, intelligent system with:
+                </p>
+                <ul className="list-disc pl-5 text-gray-700 space-y-2 mt-3">
+                  <li>Real-time data monitoring</li>
+                  <li>Automated control systems</li>
+                  <li>Secure data communication</li>
+                  <li>Advanced analytics capabilities</li>
+                </ul>
+              </div>
+            </div>
+          </Section>
 
-        <Section title="Monitoring System" icon={BarChart2} id="monitoring">
-          <MonitoringSystem />
-        </Section>
+          <Section title="System Architecture" icon={Workflow}>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Core Components</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-center bg-gray-50 p-3 rounded-md">
+                    <Cpu className="h-6 w-6 mr-3 text-blue-600" />
+                    <div>
+                      <h4 className="font-semibold">Air Heater Control</h4>
+                      <p className="text-sm text-gray-600">PI Controller with dynamic parameter tuning</p>
+                    </div>
+                  </li>
+                  <li className="flex items-center bg-gray-50 p-3 rounded-md">
+                    <Database className="h-6 w-6 mr-3 text-blue-600" />
+                    <div>
+                      <h4 className="font-semibold">Data Management</h4>
+                      <p className="text-sm text-gray-600">SQLite database for historical data storage</p>
+                    </div>
+                  </li>
+                  <li className="flex items-center bg-gray-50 p-3 rounded-md">
+                    <CloudUpload className="h-6 w-6 mr-3 text-blue-600" />
+                    <div>
+                      <h4 className="font-semibold">OPC UA Server</h4>
+                      <p className="text-sm text-gray-600">Industrial data communication protocol</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex items-center justify-center">
+                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+                  <h4 className="text-center text-lg font-semibold mb-4">System Communication Flow</h4>
+                  <div className="flex items-center space-x-4">
+                    <div className="bg-blue-500 text-white p-3 rounded-full">
+                      <Cpu className="h-6 w-6" />
+                    </div>
+                    <div className="h-1 w-16 bg-gray-300"></div>
+                    <div className="bg-green-500 text-white p-3 rounded-full">
+                      <Database className="h-6 w-6" />
+                    </div>
+                    <div className="h-1 w-16 bg-gray-300"></div>
+                    <div className="bg-purple-500 text-white p-3 rounded-full">
+                      <CloudUpload className="h-6 w-6" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Section>
 
-        <Section title="System Architecture" icon={Workflow} id="architecture">
-          <SystemArchitecture />
-        </Section>
+          <Section title="Security Features" icon={Shield}>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Cybersecurity Measures</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-center">
+                    <Lock className="h-5 w-5 mr-3 text-blue-600" />
+                    Role-based access control
+                  </li>
+                  <li className="flex items-center">
+                    <User className="h-5 w-5 mr-3 text-blue-600" />
+                    Secure user authentication
+                  </li>
+                  <li className="flex items-center">
+                    <Shield className="h-5 w-5 mr-3 text-blue-600" />
+                    SQL injection protection
+                  </li>
+                  <li className="flex items-center">
+                    <Globe className="h-5 w-5 mr-3 text-blue-600" />
+                    Secure OPC UA data transmission
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-yellow-50 p-6 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4 text-yellow-900">
+                  Security Best Practices
+                </h3>
+                <p className="text-gray-700 mb-3">
+                  Implementing multi-layered security strategies to protect industrial control systems:
+                </p>
+                <ul className="list-disc pl-5 text-gray-700 space-y-2">
+                  <li>Regular security updates</li>
+                  <li>Firewall configuration</li>
+                  <li>Limited OPC UA access</li>
+                  <li>Continuous monitoring</li>
+                </ul>
+              </div>
+            </div>
+          </Section>
 
-        <Section title="Security" icon={Shield} id="security">
-          <SecuritySection />
-        </Section>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-blue-50 rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-blue-900">Live System Demo</h2>
-            <div className="aspect-w-16 aspect-h-9 mt-4">
-              <video 
-                controls
-                className="rounded-lg shadow-lg w-full"
-                poster="/assets/images/demo-poster.jpg"
+          <div className="bg-blue-100 rounded-lg p-8 text-center mt-8">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">
+              Ready to Experience Industry 4.0?
+            </h2>
+            <p className="text-blue-800 mb-6">
+              Access our live Air Heater Control Dashboard and explore advanced industrial control technologies
+            </p>
+            <div className="flex justify-center space-x-4">
+              <PrimaryButton 
+                href="https://airheater-control-monitor.streamlit.app/"
+                target="_blank"
               >
-                <source src="/assets/videos/demo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                <LineChart className="h-5 w-5" />
+                <span>Launch Dashboard</span>
+              </PrimaryButton>
+              <PrimaryButton 
+                href="https://github.com/yourusername/air-heater-control"
+                target="_blank"
+                variant="secondary"
+              >
+                <Settings className="h-5 w-5" />
+                <span>View Project</span>
+              </PrimaryButton>
             </div>
           </div>
         </div>
       </main>
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p>&copy; 2024 Air Heater Control System. All Rights Reserved.</p>
+          <div className="flex justify-center space-x-4 mt-4">
+            <a href="#" className="hover:text-blue-400">Privacy Policy</a>
+            <a href="#" className="hover:text-blue-400">Terms of Service</a>
+            <a href="#" className="hover:text-blue-400">Contact</a>
+          </div>
+        </div>
+      </footer>
     </Layout>
   );
 };
