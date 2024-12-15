@@ -13,7 +13,8 @@ import {
   User,
   Globe,
   Terminal,
-  Share2
+  Share2,
+  Video
 } from 'lucide-react';
 
 const NavLink = ({ href, children }) => (
@@ -80,6 +81,7 @@ const Layout = ({ children }) => (
             <NavLink href="#architecture">Architecture</NavLink>
             <NavLink href="#features">Features</NavLink>
             <NavLink href="#security">Security</NavLink>
+            <NavLink href="#demo">Demo</NavLink>
             <PrimaryButton 
               href="https://airheater-control-monitor.streamlit.app/"
               target="_blank"
@@ -117,7 +119,7 @@ const App = () => {
                   <span>Launch Dashboard</span>
                 </PrimaryButton>
                 <PrimaryButton 
-                  href="https://github.com/yourusername/air-heater-control"
+                  href="https://github.com/choukha/airheater-control"
                   target="_blank"
                   variant="secondary"
                 >
@@ -259,6 +261,31 @@ const App = () => {
             </div>
           </Section>
 
+
+          <Section title="Project Slides" icon={BarChart2}>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                className="w-full h-96 rounded-lg shadow-lg"
+                src="/assets/slides/air-heater-control-slides.pdf"
+                title="Air Heater Control System"
+                frameBorder="0"
+              ></iframe>
+            </div>
+          </Section>
+
+          <Section title="Video Demonstration" icon={Video}>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                className="w-full h-96 rounded-lg shadow-lg"
+                src="https://www.youtube.com/embed/GS97DElMbIc"
+                title="Air Heater Control System Overview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </Section>
+
           <div className="bg-blue-100 rounded-lg p-8 text-center mt-8">
             <h2 className="text-2xl font-bold text-blue-900 mb-4">
               Ready to Experience Industry 4.0?
@@ -290,9 +317,11 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p>&copy; 2024 Air Heater Control System. All Rights Reserved.</p>
           <div className="flex justify-center space-x-4 mt-4">
-            <a href="#" className="hover:text-blue-400">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-400">Terms of Service</a>
             <a href="#" className="hover:text-blue-400">Contact</a>
+          </div>
+          <div className="mt-4">
+            <p>Contact: Choukha Ram</p>
+            <p>Email: <a href="mailto:choukharam@gmail.com" className="text-blue-400">choukharam@gmail.com</a></p>
           </div>
         </div>
       </footer>
